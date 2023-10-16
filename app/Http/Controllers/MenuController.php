@@ -51,17 +51,22 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Menu $menu)
     {
-        //
+        return view('menu.edit', compact('menu'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        $data = $request->all();
+        $menu->title = $data['title'];
+        $menu->link = $data['link'];
+        $menu->visible = $data['radio_choice'];
+        $menu->save();
+        return redirect()->route('menu.index');
     }
 
     /**

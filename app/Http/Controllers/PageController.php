@@ -34,19 +34,25 @@ class PageController extends Controller
     {
         $data = $request->all();
 
-        $menu = new Page();
+        $page = new Page();
 
-        $menu->title = $data['title'];
-        $menu->message = $data['message'];
-        $menu->visible = $data['radio_choice'];
-        $menu->publication_date = $data['publication_date'];
-        $menu->menu_id = 1;
-        $menu->submenu_id = 1;
+        $page->title = $data['title'];
+        $page->message = $data['message'];
+        $page->visible = $data['radio_choice'];
+        $page->publication_date = $data['publication_date'];
+        $submenu = Submenu::find($data['submenu_id']);
 
-        $menu->save();
+        if ($submenu) {
+            $page->menu_id = $submenu->menu_id;
+            $page->submenu_id = $submenu->id;
+            $page->save();
 
-        return redirect()->route('page.create');
+            return redirect()->route('page.index');
+        } else {
+            abort('404');
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -59,17 +65,33 @@ class PageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Page $page)
     {
-        //
+        $submenus = Submenu::all();
+        return view('page.edit', compact('page', 'submenus'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Page $page)
     {
-        //
+        $data = $request->all();
+        $page->title = $data['title'];
+        $page->message = $data['message'];
+        $page->visible = $data['radio_choice'];
+        $page->publication_date = $data['publication_date'];
+        $submenu = Submenu::find($data['submenu_id']);
+
+        if ($submenu) {
+            $page->menu_id = $submenu->menu_id;
+            $page->submenu_id = $submenu->id;
+            $page->save();
+
+            return redirect()->route('page.index');
+        } else {
+            abort('404');
+        }
     }
 
     /**

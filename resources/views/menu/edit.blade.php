@@ -1,31 +1,40 @@
 @extends('layouts.app')
 
+@section('title', 'Création d\'un menu')
+
 @section('content')
-  <h2>Mise à jour</h2>
-  <form action="{{ route('matiere.update', ['matiere' => $matiere->id]) }}" method="post">
+  <div class="container">
+    <h2>Création d'un menu</h2>
+    <form action="{{ route('menu.update', $menu) }}" method="post">
+      @csrf
+      @method('PUT')
 
-    @csrf
-    @method('put')
+      <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ $menu->title }}" required>
+      </div>
 
-    <div>
-      <label for="libelle">Libellé</label>
-      <input type="text" name="libelle" id="libelle" value="{{ old('libelle', $matiere->libelle) }}" required maxlength="75">
-      @error('libelle')
-        <p class="text-danger">{{ $message }}</p>
-      @enderror
-    </div>
+      <div class="mb-3">
+        <label for="link" class="form-label">Lien</label>
+        <input type="text" name="link" id="link" class="form-control" value="{{ $menu->link }}" required>
+      </div>
 
-    <div>
-      <label for="niveau">Niveau</label>
-      <input type="text" name="niveau" id="niveau" value="{{ old('niveau', $matiere->niveau) }}" required maxlength="20">
-      @error('niveau')
-        <p class="text-danger">{{ $message }}</p>
-      @enderror
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Voulez-vous l'afficher ?</label>
+        <div class="form-check">
+            <input type="radio" name="radio_choice" id="yes" value="1" class="form-check-input" {{ $menu->visible == '1' ? 'checked' : '' }}>
+            <label for="yes" class="form-check-label">Oui</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="radio_choice" id="no" value="0" class="form-check-input" {{ $menu->visible == '0' ? 'checked' : '' }}>
+            <label for="no" class="form-check-label">Non</label>
+        </div>
+      </div>
 
-    <div>
-      <input type="submit" value="Valider" class="btn btn-success">
-    </div>
 
-  </form>
+      <div>
+        <input type="submit" value="Valider" class="btn btn-success">
+      </div>
+    </form>
+  </div>
 @endsection

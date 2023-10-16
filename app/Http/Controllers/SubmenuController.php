@@ -54,17 +54,23 @@ class SubmenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Submenu $submenu)
     {
-        //
+        $menus = Menu::all();
+        return view('submenu.edit', compact('submenu', 'menus'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Submenu $submenu)
     {
-        //
+        $data = $request->all();
+        $submenu->title = $data['title'];
+        $submenu->link = $data['link'];
+        $submenu->visible = $data['radio_choice'];
+        $submenu->save();
+        return redirect()->route('submenu.index');
     }
 
     /**
