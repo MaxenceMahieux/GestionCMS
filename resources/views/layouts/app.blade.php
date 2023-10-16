@@ -13,14 +13,29 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="pb-5">
-      <a href="{{ route('menu.index') }}">Liste des menus</a>
-      <a href="{{ route('submenu.index') }}">Liste des sous-menus</a>
-      <a href="{{ route('page.index') }}">Liste des pages</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 px-5">
+        <a class="navbar-brand" href="{{ route('index') }}">Gestionnaire CMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('menu.index') }}">Liste des menus</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('submenu.index') }}">Liste des sous-menus</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('page.index') }}">Liste des pages</a>
+            </li>
+        </ul>
+        </div>
     </nav>
-    @yield('content')
-  </div>
+    <div class="container">
+        @yield('content')
+    </div>
 </body>
 
 </html>
