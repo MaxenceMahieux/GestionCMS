@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Page;
+use App\Models\Submenu;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -72,8 +74,18 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Menu $menu, Submenu $submenu)
     {
-        //
+        $submenus = Submenu::where('menu_id', $menu->id)->get();
+        foreach ($submenus as $submenu) {
+            $pages = Page::where('submenu_id', $submenu->id)->get();
+            foreach ($pages as $page) {
+                $page->delete();
+            }
+            $submenu->delete();
+        }
+        $menu->delete();
+
+        return redirect()->route('menu.index');
     }
 }

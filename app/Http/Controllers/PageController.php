@@ -97,8 +97,9 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Page $page)
     {
-        //
+        $page->delete();
+        return redirect()->route('page.index');
     }
 }

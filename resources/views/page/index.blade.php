@@ -14,7 +14,14 @@
             <a href="{{ route('page.show', ['page' => $page->id]) }}" class="text-decoration-none text-black">
               {{ $page->title }} - [{{ $page->visible ? "Affiché" : "Pas affiché" }}]
             </a>
-            <a href="{{ route('page.edit', ['page' => $page->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+            <div class="d-flex gap-3">
+                <a href="{{ route('page.edit', ['page' => $page->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                <form action="{{ route('page.destroy', $page) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
+                </form>
+            </div>
           </div>
         </li>
       @empty

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Submenu;
 use App\Models\Menu;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class SubmenuController extends Controller
@@ -76,8 +77,14 @@ class SubmenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Page $page, Submenu $submenu)
     {
-        //
+        $pages = Page::where('submenu_id', $submenu->id)->get();
+        foreach ($pages as $page) {
+            $page->delete();
+        }
+        $submenu->delete();
+
+        return redirect()->route('submenu.index');
     }
 }

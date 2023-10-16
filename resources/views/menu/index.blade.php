@@ -14,7 +14,14 @@
             <a href="{{ route('menu.show', ['menu' => $menu->id]) }}" class="text-decoration-none text-black">
               {{ $menu->title }} - [{{ $menu->visible ? "Affiché" : "Pas affiché" }}]
             </a>
-            <a href="{{ route('menu.edit', ['menu' => $menu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+            <div class="d-flex gap-3">
+                <a href="{{ route('menu.edit', ['menu' => $menu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                <form action="{{ route('menu.destroy', $menu) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
+                </form>
+            </div>
           </div>
         </li>
       @empty
