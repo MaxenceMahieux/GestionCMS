@@ -46,9 +46,9 @@ class SubmenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Submenu $submenu)
     {
-        //
+        return view('submenu.show', compact('submenu'));
     }
 
     /**

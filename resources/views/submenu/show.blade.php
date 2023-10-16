@@ -8,23 +8,23 @@
 
     <ul class="list-group mt-4">
       <li class="list-group-item">
-        <p class="mb-0">Titre : {{ $menu->title }}</p>
+        <p class="mb-0">Titre : {{ $submenu->title }}</p>
       </li>
       <li class="list-group-item">
-        <p class="mb-0">ID : {{ $menu->id }}</p>
+        <p class="mb-0">ID : {{ $submenu->id }}</p>
       </li>
       <li class="list-group-item">
-        <p class="mb-0">Lien : {{ $menu->link }}</p>
+        <p class="mb-0">Lien : {{ $submenu->link }}</p>
       </li>
       <li class="list-group-item">
         <p class="mb-0">
           <em>
-            {{ $menu->title ? "Le menu est affiché" : "Le menu n'est pas affiché" }}
+            {{ $submenu->title ? "Le sous-menu est affiché" : "Le sous-menu n'est pas affiché" }}
           </em>
         </p>
       </li>
     </ul>
 
-    <a href="{{ route('menu.destroy', ['menu' => $menu->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
+    <a href="{{ route('submenu.destroy', ['submenu' => $submenu->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
   </div>
 @endsection

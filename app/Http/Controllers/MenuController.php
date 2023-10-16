@@ -45,7 +45,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        return view('menu.show');
+        return view('menu.show', compact('menu'));
     }
 
     /**
