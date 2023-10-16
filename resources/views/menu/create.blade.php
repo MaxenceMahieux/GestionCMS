@@ -10,12 +10,12 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" required class="form-control" required>
+        <input type="text" name="title" id="title" class="form-control">
       </div>
 
       <div class="mb-3">
         <label for="link" class="form-label">Lien</label>
-        <input type="text" name="link" id="link" class="form-control" required>
+        <input type="text" name="link" id="link" class="form-control">
       </div>
 
       <div class="mb-3">

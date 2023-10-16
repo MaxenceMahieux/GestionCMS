@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Submenu;
 use App\Models\Menu;
 use App\Models\Page;
-use Illuminate\Http\Request;
+use App\Http\Requests\SubmenuRequest;
 
 class SubmenuController extends Controller
 {
@@ -31,7 +31,7 @@ class SubmenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubmenuRequest $request)
     {
         $data = $request->all();
         $submenu = new Submenu();
@@ -64,7 +64,7 @@ class SubmenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Submenu $submenu)
+    public function update(SubmenuRequest $request, Submenu $submenu)
     {
         $data = $request->all();
         $submenu->title = $data['title'];

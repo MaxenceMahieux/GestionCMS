@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Submenu;
-use Illuminate\Http\Request;
+use App\Http\Requests\MenuRequest;
 
 class MenuController extends Controller
 {
@@ -30,7 +30,7 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
         $data = $request->all();
         $menu = new Menu();
@@ -61,7 +61,7 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(MenuRequest $request, Menu $menu)
     {
         $data = $request->all();
         $menu->title = $data['title'];

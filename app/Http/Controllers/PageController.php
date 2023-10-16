@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Submenu;
-use Illuminate\Http\Request;
+use App\Http\Requests\PageRequest;
 
 class PageController extends Controller
 {
@@ -30,7 +30,7 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
         $data = $request->all();
 
@@ -74,7 +74,7 @@ class PageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Page $page)
+    public function update(PageRequest $request, Page $page)
     {
         $data = $request->all();
         $page->title = $data['title'];
