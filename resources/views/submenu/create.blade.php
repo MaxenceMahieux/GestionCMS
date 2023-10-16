@@ -3,42 +3,45 @@
 @section('title', 'Création d\'un sous-menu')
 
 @section('content')
-  <h2>Création d'un sous-menu</h2>
-  <form action="{{ route('submenu.store') }}" method="post">
+  <div class="container">
+    <h2>Création d'un sous-menu</h2>
+    <form action="{{ route('submenu.store') }}" method="post">
+      @csrf
 
-    @csrf
+      <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" name="title" id="title" required class="form-control" required>
+      </div>
 
-    <div>
-      <label for="title">Titre</label>
-      <input type="text" name="title" id="title" required value="{{ old('title') }}" maxlength="75">
-    </div>
+      <div class="mb-3">
+        <label for="link" class="form-label">Lien</label>
+        <input type="text" name="link" id="link" class="form-control" required>
+      </div>
 
-    <div>
-      <label for="link">Lien</label>
-      <input type="text" name="link" id="link" required value="{{ old('link') }}">
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Voulez-vous l'afficher ?</label>
+        <div class="form-check">
+          <input type="radio" name="radio_choice" id="yes" value="1" class="form-check-input">
+          <label for="yes" class="form-check-label">Oui</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="radio_choice" id="no" value="0" class="form-check-input">
+          <label for="no" class="form-check-label">Non</label>
+        </div>
+      </div>
 
-    <div>
-        <fieldset @required(true)>
-            <label for="visible">Voulez-vous l'afficher ?</label>
-            <input type="radio" name="radio_choice" id="yes" value="1"><label for="yes">Oui</label>
-            <input type="radio" name="radio_choice" id="no" value="0"><label for="no">Non</label><br/>
-        </fieldset>
-    </div>
-
-    <div>
-        <label for="menu">Menu parent</label>
-        <select name="menu_id" id="menu_id">
+      <div class="mb-3">
+        <label for="menu" class="form-label">Menu parent</label>
+        <select name="menu_id" id="menu_id" class="form-select" required>
           @foreach ($menus as $menu)
             <option value="{{ $menu->id }}">{{ $menu->title }}</option>
           @endforeach
         </select>
-    </div>
+      </div>
 
-
-    <div>
-      <input type="submit" value="Valider" class="btn btn-success">
-    </div>
-
-  </form>
+      <div>
+        <input type="submit" value="Valider" class="btn btn-success">
+      </div>
+    </form>
+  </div>
 @endsection

@@ -33,14 +33,14 @@ class SubmenuController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $menu = new Submenu();
-        $menu->title = $data['title'];
-        $menu->link = $data['link'];
-        $menu->visible = $data['radio_choice'];
-        $menu->menu_id = $data['menu_id'];
-        $menu->save();
-        $submenus = Submenu::all();
-        return view('submenu.index', compact('submenus'));
+        $submenu = new Submenu();
+        $submenu->title = $data['title'];
+        $submenu->link = $data['link'];
+        $submenu->visible = $data['radio_choice'];
+        $submenu->menu_id = $data['menu_id'];
+        $submenu->save();
+
+        return redirect()->route('submenu.index');
     }
 
     /**

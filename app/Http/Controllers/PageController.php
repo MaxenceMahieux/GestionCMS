@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Submenu;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -22,7 +23,8 @@ class PageController extends Controller
     public function create()
     {
         $pages = Page::all();
-        return view('page.create', compact('pages'));
+        $submenus = Submenu::all();
+        return view('page.create', compact('pages', 'submenus'));
     }
 
     /**
@@ -43,7 +45,7 @@ class PageController extends Controller
 
         $menu->save();
 
-        return view('page.index');
+        return redirect()->route('page.create');
     }
 
     /**
