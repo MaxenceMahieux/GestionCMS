@@ -4,6 +4,7 @@
 
 @section('content')
   <div class="container">
+    <h1 class="mb-5">Liste des menus</h1>
     <a href="{{ route('menu.create') }}" class="btn btn-primary mb-3">Ajouter</a>
 
     <ul class="list-group">

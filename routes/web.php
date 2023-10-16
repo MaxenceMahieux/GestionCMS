@@ -3,6 +3,7 @@
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SubmenuController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-
 /* Resources Routes */
+Route::resource('/', HomeController::class);
 Route::resource('/menu', MenuController::class);
 Route::resource('/submenu', SubmenuController::class);
 Route::resource('/page', PageController::class);
