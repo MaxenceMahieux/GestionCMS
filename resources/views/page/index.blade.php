@@ -1,9 +1,16 @@
 <x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Liste des menus') }}
+    </h2>
+  </x-slot>
   <div class="container">
-    <h1 class="my-5 text-3xl font-bold">Liste des pages</h1>
-    <a href="{{ route('page.create') }}" class="btn btn-primary mb-3">Ajouter</a>
+    
+    @can('page-create')
+      <a href="{{ route('page.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+    @endcan
 
-    <ul class="list-group">
+    <ul class="list-group mt-5">
       @forelse ($pages as $page)
         <li class="list-group-item">
           <div class="d-flex justify-content-between align-items-center">
@@ -11,12 +18,16 @@
               {{ $page->title }} - [{{ $page->visible ? "Affiché" : "Pas affiché" }}]
             </a>
             <div class="d-flex gap-3">
-                <a href="{{ route('page.edit', ['page' => $page->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
-                <form action="{{ route('page.destroy', $page) }}" method="post">
+                @can('page-edit')
+                  <a href="{{ route('page.edit', ['page' => $page->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                @endcan
+                @can('page-delete')
+                  <form action="{{ route('page.destroy', $page) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-                </form>
+                  </form>
+                @endcan
             </div>
           </div>
         </li>

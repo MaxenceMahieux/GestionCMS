@@ -8,6 +8,18 @@ use App\Http\Requests\PageRequest;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        // Middleware can pour vérifier l'autorisation "page-create"
+        $this->middleware('can:page-create')->only('create');
+
+        // Middleware can pour vérifier l'autorisation "page-edit"
+        $this->middleware('can:page-edit')->only('edit');
+        
+        // Middleware can pour vérifier l'autorisation "page-delete"
+        $this->middleware('can:page-delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

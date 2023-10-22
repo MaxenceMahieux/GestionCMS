@@ -21,6 +21,12 @@
       </li>
     </ul>
 
-    <a href="{{ route('submenu.destroy', ['submenu' => $submenu->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
+    @can('submenu-delete')
+      <form action="{{ route('submenu.destroy', $submenu) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
+      </form>
+    @endcan
   </div>
 </x-app-layout>

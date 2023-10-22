@@ -24,6 +24,12 @@
       </li>
     </ul>
 
-    <a href="{{ route('page.destroy', ['page' => $page->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
+    @can('page-delete')
+      <form action="{{ route('page.destroy', $page) }}" method="post">
+        @method('DELETE')
+        @csrf
+        <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
+      </form>
+    @endcan
   </div>
 </x-app-layout>
