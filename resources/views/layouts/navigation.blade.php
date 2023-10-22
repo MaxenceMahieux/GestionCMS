@@ -12,6 +12,18 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        {{ __('Accueil') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.index')">
+                        {{ __('Liste des menus') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('submenu.index')" :active="request()->routeIs('submenu.index')">
+                        {{ __('Liste des sous-menus') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('page.index')" :active="request()->routeIs('page.index')">
+                        {{ __('Liste des pages') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>

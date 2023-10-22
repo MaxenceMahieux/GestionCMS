@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Menu')
-
-@section('content')
+<x-app-layout>
   <div class="container">
     <h1 class="mt-4">Présentation du menu</h1>
 
@@ -27,4 +23,4 @@
 
     <a href="{{ route('menu.destroy', ['menu' => $menu->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
   </div>
-@endsection
+</x-app-layout>

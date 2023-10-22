@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Liste des sous-menus')
-
-@section('content')
+<x-app-layout>
   <div class="container">
-    <h1 class="mb-5">Liste des sous-menus</h1>
+    <h1 class="my-5 text-3xl font-bold">Liste des sous-menus</h1>
     <a href="{{ route('submenu.create') }}" class="btn btn-primary mb-3">Ajouter</a>
 
     <ul class="list-group">
@@ -31,4 +27,4 @@
       @endforelse
     </ul>
   </div>
-@endsection
+</x-app-layout>

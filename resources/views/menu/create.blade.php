@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Création d\'un menu')
-
-@section('content')
+<x-app-layout>
   <div class="container">
-    <h2>Création d'un menu</h2>
+    <h1 class="my-5 text-3xl font-bold">Création d'un menu</h1>
     <form action="{{ route('menu.store') }}" method="post">
       @csrf
 
@@ -35,4 +31,4 @@
       </div>
     </form>
   </div>
-@endsection
+</x-app-layout>

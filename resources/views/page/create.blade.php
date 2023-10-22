@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Création d\'une page')
-
-@section('content')
+<x-app-layout>
   <div class="container">
-    <h2>Création d'une page</h2>
+    <h1 class="my-5 text-3xl font-bold">Création d'une page</h1>
     <form action="{{ route('page.store') }}" method="post">
       @csrf
 
@@ -49,4 +45,4 @@
       </div>
     </form>
   </div>
-@endsection
+</x-app-layout>

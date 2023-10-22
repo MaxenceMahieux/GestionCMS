@@ -1,11 +1,11 @@
-@extends('layouts.app')
-
-@section('title', 'Liste des menus')
-
-@section('content')
+<x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Liste des menus') }}
+    </h2>
+  </x-slot>
   <div class="container">
-    <h1 class="mb-5">Liste des menus</h1>
-    <a href="{{ route('menu.create') }}" class="btn btn-primary mb-3">Ajouter</a>
+    <a href="{{ route('menu.create') }}" class="btn btn-primary mb-3 mt-5">Ajouter</a>
 
     <ul class="list-group">
       @forelse ($menus as $menu)
@@ -31,4 +31,4 @@
       @endforelse
     </ul>
   </div>
-@endsection
+</x-app-layout>

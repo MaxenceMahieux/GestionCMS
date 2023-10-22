@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Menu')
-
-@section('content')
+<x-app-layout>
   <div class="container">
-    <h1 class="mt-4">Présentation d'une page</h1>
+    <h1 class="my-5 text-3xl font-bold">Présentation d'une page</h1>
 
     <ul class="list-group mt-4">
       <li class="list-group-item">
@@ -30,4 +26,4 @@
 
     <a href="{{ route('page.destroy', ['page' => $page->id]) }}" class="btn btn-danger mt-3">Supprimer</a>
   </div>
-@endsection
+</x-app-layout>

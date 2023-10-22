@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Création d\'un sous-menu')
-
-@section('content')
+<x-app-layout>
   <div class="container">
-    <h2>Création d'un sous-menu</h2>
+    <h1 class="my-5 text-3xl font-bold">Modification du sous-menu</h1>
     <form action="{{ route('submenu.update', $submenu) }}" method="post">
       @csrf
       @method('PUT')
