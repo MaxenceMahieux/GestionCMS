@@ -30,9 +30,9 @@ Route::middleware('auth')->group(function () {
 
 // Toutes les routes des différents controller et de leurs méthodes
 Route::resource('/', HomeController::class);
-Route::resource('/menu', MenuController::class);
-Route::resource('/submenu', SubmenuController::class);
-Route::resource('/page', PageController::class);
+Route::resource('/menu', MenuController::class)->middleware('auth');
+Route::resource('/submenu', SubmenuController::class)->middleware('auth');
+Route::resource('/page', PageController::class)->middleware('auth');
 
 Auth::check();
 $user = Auth::user(); // Instance de l'user connecté
