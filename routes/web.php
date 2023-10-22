@@ -28,9 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Toutes les routes des différents controller et de leurs méthodes
 Route::resource('/', HomeController::class);
 Route::resource('/menu', MenuController::class);
 Route::resource('/submenu', SubmenuController::class);
 Route::resource('/page', PageController::class);
+
+Auth::check();
+$user = Auth::user(); // Instance de l'user connecté
+$user = Auth::id(); // ID de l'user connecté
 
 require __DIR__.'/auth.php';
