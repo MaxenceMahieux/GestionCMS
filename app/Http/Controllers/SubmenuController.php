@@ -9,6 +9,18 @@ use App\Http\Requests\SubmenuRequest;
 
 class SubmenuController extends Controller
 {
+    public function __construct()
+    {
+        // Middleware can pour vérifier l'autorisation "submenu-create"
+        $this->middleware('can:submenu-create')->only('create');
+
+        // Middleware can pour vérifier l'autorisation "submenu-edit"
+        $this->middleware('can:submenu-edit')->only('edit');
+        
+        // Middleware can pour vérifier l'autorisation "submenu-delete"
+        $this->middleware('can:submenu-delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -1,9 +1,16 @@
 <x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Liste des sous-menus') }}
+    </h2>
+  </x-slot>
   <div class="container">
-    <h1 class="my-5 text-3xl font-bold">Liste des sous-menus</h1>
-    <a href="{{ route('submenu.create') }}" class="btn btn-primary mb-3">Ajouter</a>
+    
+    @can('submenu-create')
+      <a href="{{ route('submenu.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+    @endcan
 
-    <ul class="list-group">
+    <ul class="list-group mt-5">
       @forelse ($submenus as $submenu)
         <li class="list-group-item">
           <div class="d-flex justify-content-between align-items-center">
@@ -11,12 +18,16 @@
               {{ $submenu->title }} - [{{ $submenu->visible ? "Affiché" : "Pas affiché" }}]
             </a>
             <div class="d-flex gap-3">
-                <a href="{{ route('submenu.edit', ['submenu' => $submenu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
-                <form action="{{ route('submenu.destroy', $submenu) }}" method="post">
+                @can('submenu-edit')
+                  <a href="{{ route('submenu.edit', ['submenu' => $submenu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                @endcan
+                @can('submenu-delete')
+                  <form action="{{ route('submenu.destroy', $submenu) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-                </form>
+                  </form>
+                @endcan
             </div>
           </div>
         </li>

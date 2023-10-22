@@ -6,9 +6,22 @@ use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Submenu;
 use App\Http\Requests\MenuRequest;
+use Silber\Bouncer\Bouncer;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        // Middleware can pour vérifier l'autorisation "menu-create"
+        $this->middleware('can:menu-create')->only('create');
+
+        // Middleware can pour vérifier l'autorisation "menu-edit"
+        $this->middleware('can:menu-edit')->only('edit');
+        
+        // Middleware can pour vérifier l'autorisation "menu-delete"
+        $this->middleware('can:menu-delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

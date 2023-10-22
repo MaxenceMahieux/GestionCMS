@@ -5,9 +5,11 @@
     </h2>
   </x-slot>
   <div class="container">
-    <a href="{{ route('menu.create') }}" class="btn btn-primary mb-3 mt-5">Ajouter</a>
+    @can('menu-create')
+      <a href="{{ route('menu.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+    @endcan
 
-    <ul class="list-group">
+    <ul class="list-group mt-5">
       @forelse ($menus as $menu)
         <li class="list-group-item">
           <div class="d-flex justify-content-between align-items-center">
@@ -15,12 +17,16 @@
               {{ $menu->title }} - [{{ $menu->visible ? "Affiché" : "Pas affiché" }}]
             </a>
             <div class="d-flex gap-3">
+              @can('menu-edit')
                 <a href="{{ route('menu.edit', ['menu' => $menu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
-                <form action="{{ route('menu.destroy', $menu) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-                </form>
+              @endcan
+              @can('menu-delete')
+              <form action="{{ route('menu.destroy', $menu) }}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
+              </form>
+              @endcan
             </div>
           </div>
         </li>
