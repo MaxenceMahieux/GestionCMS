@@ -44,11 +44,11 @@ DB_PASSWORD=secret
 - `use Silber\Bouncer\Database\Role;`
 - `Role::create(['name' => 'exemple']);`
 
-### Ajout du rôle à un utilisateur
+#### Ajout du rôle à un utilisateur
 - `$user = User::find(1);`
 - `Bouncer::assign('exemple')->to($user);`
 
-### Ajouter des abilités a un rôle
+#### Ajouter des abilités a un rôle
 - `use Bouncer;`
 - `$exemple = Bouncer::role()->where('name', 'exemple')->first();`
 - `Bouncer::allow($exemple)->to('page-create');`
