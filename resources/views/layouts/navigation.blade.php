@@ -13,16 +13,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('Accueil') }}
+                        {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.index')">
-                        {{ __('Liste des menus') }}
+                        {{ __('List of menus') }}
                     </x-nav-link>
                     <x-nav-link :href="route('submenu.index')" :active="request()->routeIs('submenu.index')">
-                        {{ __('Liste des sous-menus') }}
+                        {{ __('List of submenus') }}
                     </x-nav-link>
                     <x-nav-link :href="route('page.index')" :active="request()->routeIs('page.index')">
-                        {{ __('Liste des pages') }}
+                        {{ __('List of pages') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -73,6 +73,15 @@
                         </span>
                     </div>
                 @endguest
+                <form action="{{ route('change.language') }}" method="post" id="languageForm">
+                    @csrf
+                    <select name="language" id="language" class="form-select form-select-sm">
+                        <option value="fr" @if (session('locale') == 'fr') selected @endif>{{ __('French') }}
+                        </option>
+                        <option value="en" @if (session('locale') == 'en') selected @endif>{{ __('English') }}
+                        </option>
+                    </select>
+                </form>                                                                          
             </div>
 
             <!-- Hamburger -->
@@ -132,3 +141,9 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.getElementById('language').addEventListener('change', function() {
+        document.getElementById('languageForm').submit();
+    });
+</script>

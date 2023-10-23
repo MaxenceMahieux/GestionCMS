@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +35,6 @@ Route::resource('/menu', MenuController::class);
 Route::resource('/submenu', SubmenuController::class);
 Route::resource('/page', PageController::class);
 
-Auth::check();
-$user = Auth::user(); // Instance de l'user connecté
-$user = Auth::id(); // ID de l'user connecté
+Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->middleware(['auth', 'verified'])->name('change.language');
 
 require __DIR__.'/auth.php';

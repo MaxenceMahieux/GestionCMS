@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="container">
-    <h1 class="my-5 text-3xl font-bold">Modification du sous-menu</h1>
+    <h1 class="my-5 text-3xl font-bold">{{ __('Editing submenu') }}</h1>
     <form action="{{ route('submenu.update', $submenu) }}" method="post">
       @csrf
       @method('PUT')
