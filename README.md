@@ -31,6 +31,49 @@ DB_PASSWORD=secret
 
 - [Laravel](https://laravel.com/)
 - [Boostrap](https://getbootstrap.com/)
+- [Breeze](https://laravel.com/docs/10.x/starter-kits)
+- [Tinker](https://laravel.com/docs/10.x/artisan#tinker)
+- [Bouncer](https://github.com/JosephSilber/bouncer)
+
+### Configuration des rôles
+
+#### Accéder à Tinker
+- `artisan tinker`
+
+#### Créer un rôle
+- `use Silber\Bouncer\Database\Role;`
+- `Role::create(['name' => 'exemple']);`
+
+### Ajout du rôle à un utilisateur
+- `$user = User::find(1);`
+- `Bouncer::assign('exemple')->to($user);`
+
+### Ajouter des abilités a un rôle
+- `use Bouncer;`
+- `$exemple = Bouncer::role()->where('name', 'exemple')->first();`
+- `Bouncer::allow($exemple)->to('page-create');`
+
+#### Refresh le terminal :
+- `Bouncer::refresh()`
+
+## Tableau des permissions
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Tableau des permissions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admin</td>
+      <td>menu-create | menu-edit | menu-delete | submenu-create | submenu-edit | submenu-delete</td>
+    </tr>
+    <tr>
+      <td>editor</td>
+      <td>page-create | page-edit | page-delete</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Credits
 
