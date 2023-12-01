@@ -6,12 +6,12 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" required class="form-control" value="{{ old('title') }}" maxlength="75">
+        <x-input-text property="title" />
       </div>
 
       <div class="mb-3">
         <label for="message" class="form-label">Message</label>
-        <input type="text" name="message" id="message" required class="form-control" value="{{ old('message') }}">
+        <x-input-text property="message" />
       </div>
 
       <div class="mb-3">

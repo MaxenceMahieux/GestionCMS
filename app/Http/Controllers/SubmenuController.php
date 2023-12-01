@@ -6,10 +6,13 @@ use App\Models\Submenu;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Http\Requests\SubmenuRequest;
+use App\Http\Repositories\SubmenuRepository;
 
 class SubmenuController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(SubmenuRepository $repository)
     {
         // Middleware can pour vérifier l'autorisation "submenu-create"
         $this->middleware('can:submenu-create')->only('create');
@@ -19,6 +22,8 @@ class SubmenuController extends Controller
         
         // Middleware can pour vérifier l'autorisation "submenu-delete"
         $this->middleware('can:submenu-delete')->only('destroy');
+
+        $this->repository = $repository;
     }
 
     /**
@@ -45,14 +50,7 @@ class SubmenuController extends Controller
      */
     public function store(SubmenuRequest $request)
     {
-        $data = $request->all();
-        $submenu = new Submenu();
-        $submenu->title = $data['title'];
-        $submenu->link = $data['link'];
-        $submenu->visible = $data['radio_choice'];
-        $submenu->menu_id = $data['menu_id'];
-        $submenu->save();
-
+        $this->repository->store($request);
         return redirect()->route('submenu.index');
     }
 
@@ -78,11 +76,7 @@ class SubmenuController extends Controller
      */
     public function update(SubmenuRequest $request, Submenu $submenu)
     {
-        $data = $request->all();
-        $submenu->title = $data['title'];
-        $submenu->link = $data['link'];
-        $submenu->visible = $data['radio_choice'];
-        $submenu->save();
+        $this->repository->update($request, $submenu);
         return redirect()->route('submenu.index');
     }
 

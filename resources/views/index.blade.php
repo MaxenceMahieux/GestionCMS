@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Accueil') }}
+        {{ __('Home') }}
     </h2>
   </x-slot>
 
@@ -21,6 +21,6 @@
         </li>
       @endforelse
     </ul>
-    <p class="m-3">{{ $menu->where('visible', 0)->count() }} menus non affichés et {{ $pages->where('visible', 0)->count() }} pages non publiées</p>
+    <p class="m-3">{{ $menus->where('visible', 0)->count() }} menus non affichés et {{ $pages->where('visible', 0)->count() }} pages non publiées</p>
   </div>
 </x-app-layout>

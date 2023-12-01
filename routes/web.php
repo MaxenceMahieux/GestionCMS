@@ -37,4 +37,8 @@ Route::resource('/page', PageController::class);
 
 Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->middleware(['auth', 'verified'])->name('change.language');
 
+Route::get('/mail/store/menu', function() {
+    return view('mail.store.menu');
+});
+
 require __DIR__.'/auth.php';

@@ -6,11 +6,14 @@ use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Submenu;
 use App\Http\Requests\MenuRequest;
+use App\Http\Repositories\MenuRepository;
 use Silber\Bouncer\Bouncer;
 
 class MenuController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(MenuRepository $repository)
     {
         // Middleware can pour vérifier l'autorisation "menu-create"
         $this->middleware('can:menu-create')->only('create');
@@ -20,6 +23,8 @@ class MenuController extends Controller
         
         // Middleware can pour vérifier l'autorisation "menu-delete"
         $this->middleware('can:menu-delete')->only('destroy');
+
+        $this->repository = $repository;
     }
 
     /**
@@ -45,14 +50,8 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        $data = $request->all();
-        $menu = new Menu();
-        $menu->title = $data['title'];
-        $menu->link = $data['link'];
-        $menu->visible = $data['radio_choice'];
-        $menu->save();
-        $menus = Menu::all();
-        return view('menu.index', compact('menus'));
+        $this->repository->store($request);
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -76,11 +75,7 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, Menu $menu)
     {
-        $data = $request->all();
-        $menu->title = $data['title'];
-        $menu->link = $data['link'];
-        $menu->visible = $data['radio_choice'];
-        $menu->save();
+        $this->repository->update($request, $menu);
         return redirect()->route('menu.index');
     }
 

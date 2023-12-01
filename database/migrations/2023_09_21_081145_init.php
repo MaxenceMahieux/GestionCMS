@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title', 50);
-            $table->string('link', 75);
+            $table->text('link');
             $table->boolean('visible');
         });
 
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title', 50);
-            $table->link('link', 75);
+            $table->text('link');
             $table->boolean('visible');
             $table->integer('menu_id');
         });
@@ -45,6 +45,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('submenus');
+        Schema::dropIfExists('pages');
     }
 };

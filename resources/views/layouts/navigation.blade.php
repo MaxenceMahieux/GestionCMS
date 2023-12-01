@@ -35,7 +35,7 @@
                 @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <button class="inline-flex mr-10 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                 <div>{{ Auth::user()->name }}</div>
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -64,7 +64,7 @@
                     </x-dropdown>
                 @endauth
                 @guest  
-                    <div>
+                    <div class="mr-10">
                         <span>
                             <a href="{{ url('/login') }}">Se connecter</a>
                         </span>
@@ -75,10 +75,10 @@
                 @endguest
                 <form action="{{ route('change.language') }}" method="post" id="languageForm">
                     @csrf
-                    <select name="language" id="language" class="form-select form-select-sm">
-                        <option value="fr" @if (session('locale') == 'fr') selected @endif>{{ __('French') }}
+                    <select name="language" id="language" class="form-select form-select-sm border border-transparent text-sm font-medium rounded-md text-gray-500 bg-white">
+                        <option value="fr" @if (session('locale') == 'fr') selected @endif>{{ '🇫🇷 Français' }}
                         </option>
-                        <option value="en" @if (session('locale') == 'en') selected @endif>{{ __('English') }}
+                        <option value="en" @if (session('locale') == 'en') selected @endif>{{ '🇬🇧 English' }}
                         </option>
                     </select>
                 </form>                                                                          

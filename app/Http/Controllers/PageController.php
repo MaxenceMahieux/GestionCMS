@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Submenu;
 use App\Http\Requests\PageRequest;
+use App\Http\Repositories\PageRepository;
 
 class PageController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(PageRepository $repository)
     {
         // Middleware can pour vérifier l'autorisation "page-create"
         $this->middleware('can:page-create')->only('create');
@@ -18,6 +21,8 @@ class PageController extends Controller
         
         // Middleware can pour vérifier l'autorisation "page-delete"
         $this->middleware('can:page-delete')->only('destroy');
+
+        $this->repository = $repository;
     }
 
     /**
@@ -42,27 +47,10 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PageRequest $request)
+    public function store(PageRequest $request, Submenu $submenu)
     {
-        $data = $request->all();
-
-        $page = new Page();
-
-        $page->title = $data['title'];
-        $page->message = $data['message'];
-        $page->visible = $data['radio_choice'];
-        $page->publication_date = $data['publication_date'];
-        $submenu = Submenu::find($data['submenu_id']);
-
-        if ($submenu) {
-            $page->menu_id = $submenu->menu_id;
-            $page->submenu_id = $submenu->id;
-            $page->save();
-
-            return redirect()->route('page.index');
-        } else {
-            abort('404');
-        }
+        $this->repository->store($request);
+        return redirect()->route('page.index');
     }
 
 
@@ -88,22 +76,8 @@ class PageController extends Controller
      */
     public function update(PageRequest $request, Page $page)
     {
-        $data = $request->all();
-        $page->title = $data['title'];
-        $page->message = $data['message'];
-        $page->visible = $data['radio_choice'];
-        $page->publication_date = $data['publication_date'];
-        $submenu = Submenu::find($data['submenu_id']);
-
-        if ($submenu) {
-            $page->menu_id = $submenu->menu_id;
-            $page->submenu_id = $submenu->id;
-            $page->save();
-
-            return redirect()->route('page.index');
-        } else {
-            abort('404');
-        }
+        $this->repository->update($request, $page);
+        return redirect()->route('page.index');
     }
 
     /**

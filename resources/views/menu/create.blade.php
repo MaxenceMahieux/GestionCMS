@@ -6,12 +6,12 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" class="form-control">
+        <x-input-text property="title" />
       </div>
 
       <div class="mb-3">
         <label for="link" class="form-label">Lien</label>
-        <input type="text" name="link" id="link" class="form-control">
+        <x-input-text property="link" />
       </div>
 
       <div class="mb-3">
