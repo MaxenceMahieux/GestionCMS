@@ -7,6 +7,9 @@ use App\Models\Menu;
 use App\Models\Page;
 use App\Http\Requests\SubmenuRequest;
 use App\Http\Repositories\SubmenuRepository;
+use App\Mail\DeleteSubmenuMail;
+use Illuminate\Support\Facades\Mail;
+use Auth;
 
 class SubmenuController extends Controller
 {
@@ -90,6 +93,8 @@ class SubmenuController extends Controller
             $page->delete();
         }
         $submenu->delete();
+
+        Mail::to(Auth::user()->email)->send(new DeleteSubmenuMail($submenu));
 
         return redirect()->route('submenu.index');
     }

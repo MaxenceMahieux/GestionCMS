@@ -4,7 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Page;
 use App\Models\Submenu;
-use App\Mail\StoreMenuMail;
+use App\Mail\StorePageMail;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 
@@ -22,7 +22,7 @@ class PageRepository
         $page->submenu_id = $submenu->id;
         $page->save();
 
-        /* Mail::to(Auth::user()->email)->send(new StoreMenuMail($menu)); */
+        Mail::to(Auth::user()->email)->send(new StorePageMail($page));
     }
 
     public function update($request, $page) {

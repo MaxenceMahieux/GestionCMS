@@ -3,7 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Submenu;
-use App\Mail\StoreMenuMail;
+use App\Mail\StoreSubMenuMail;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 
@@ -17,7 +17,7 @@ class SubmenuRepository
         $submenu->menu_id = $request['menu_id'];
         $submenu->save();
 
-        /* Mail::to(Auth::user()->email)->send(new StoreMenuMail($menu)); */
+        Mail::to(Auth::user()->email)->send(new StoreSubmenuMail($submenu));
     }
 
     public function update($request, $submenu) {

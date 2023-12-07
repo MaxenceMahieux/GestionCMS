@@ -6,6 +6,9 @@ use App\Models\Page;
 use App\Models\Submenu;
 use App\Http\Requests\PageRequest;
 use App\Http\Repositories\PageRepository;
+use App\Mail\DeletePageMail;
+use Illuminate\Support\Facades\Mail;
+use Auth;
 
 class PageController extends Controller
 {
@@ -86,6 +89,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
+        Mail::to(Auth::user()->email)->send(new DeletePageMail($page));
         return redirect()->route('page.index');
     }
 }

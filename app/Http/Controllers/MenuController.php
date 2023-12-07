@@ -8,6 +8,9 @@ use App\Models\Submenu;
 use App\Http\Requests\MenuRequest;
 use App\Http\Repositories\MenuRepository;
 use Silber\Bouncer\Bouncer;
+use App\Mail\DeleteMenuMail;
+use Illuminate\Support\Facades\Mail;
+use Auth;
 
 class MenuController extends Controller
 {
@@ -93,6 +96,8 @@ class MenuController extends Controller
             $submenu->delete();
         }
         $menu->delete();
+
+        Mail::to(Auth::user()->email)->send(new DeleteMenuMail($menu));
 
         return redirect()->route('menu.index');
     }
