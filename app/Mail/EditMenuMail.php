@@ -4,22 +4,22 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\Page;
+use App\Models\Menu;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class DeletePageMail extends Mailable
+class EditMenuMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Page $page)
+    public function __construct(Menu $menu)
     {
-        $this->page = $page;
+        $this->menu = $menu;
     }
 
     /**
@@ -28,7 +28,7 @@ class DeletePageMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Suppression d\'une page',
+            subject: 'Modification d\'un menu',
         );
     }
 
@@ -38,7 +38,7 @@ class DeletePageMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.delete.page',
+            view: 'mail.edit.menu',
         );
     }
 

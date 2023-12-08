@@ -97,8 +97,6 @@ class MenuController extends Controller
         }
         $menu->delete();
 
-        Mail::to(Auth::user()->email)->send(new DeleteMenuMail($menu));
-
         return redirect()->route('menu.index');
     }
 }

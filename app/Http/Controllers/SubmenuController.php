@@ -94,8 +94,6 @@ class SubmenuController extends Controller
         }
         $submenu->delete();
 
-        Mail::to(Auth::user()->email)->send(new DeleteSubmenuMail($submenu));
-
         return redirect()->route('submenu.index');
     }
 }

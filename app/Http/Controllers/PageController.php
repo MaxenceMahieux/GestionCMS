@@ -89,7 +89,6 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
-        Mail::to(Auth::user()->email)->send(new DeletePageMail($page));
         return redirect()->route('page.index');
     }
 }

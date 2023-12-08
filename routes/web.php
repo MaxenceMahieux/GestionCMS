@@ -56,16 +56,16 @@ Route::get('/mail/store/page', function() {
     return view('mail.store.page');
 });
 
-Route::get('/mail/delete/menu', function() {
-    return view('mail.delete.menu');
+Route::get('/mail/edit/menu', function() {
+    return view('mail.edit.menu');
 });
 
-Route::get('/mail/delete/submenu', function() {
-    return view('mail.delete.submenu');
+Route::get('/mail/edit/submenu', function() {
+    return view('mail.edit.submenu');
 });
 
-Route::get('/mail/delete/page', function() {
-    return view('mail.delete.page');
+Route::get('/mail/edit/page', function() {
+    return view('mail.edit.page');
 });
 
 /* Requires */

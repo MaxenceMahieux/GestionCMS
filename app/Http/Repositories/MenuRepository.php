@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Menu;
 use App\Mail\StoreMenuMail;
+use App\Mail\EditMenuMail;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 
@@ -24,5 +25,7 @@ class MenuRepository
         $menu->link = $request['link'];
         $menu->visible = $request['radio_choice'];
         $menu->save();
+
+        Mail::to(Auth::user()->email)->send(new EditMenuMail($menu));
     }
 }

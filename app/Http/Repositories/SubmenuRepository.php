@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Submenu;
 use App\Mail\StoreSubMenuMail;
+use App\Mail\EditSubMenuMail;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 
@@ -25,5 +26,8 @@ class SubmenuRepository
         $submenu->link = $request['link'];
         $submenu->visible = $request['radio_choice'];
         $submenu->save();
+
+        
+        Mail::to(Auth::user()->email)->send(new EditSubmenuMail($submenu));
     }
 }
