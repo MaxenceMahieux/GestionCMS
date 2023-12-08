@@ -4,12 +4,24 @@
 
 ### Initialiser le projet
 
+Commencez par ajouter les 2 base de données suivantes dans votre Homestead.yaml
+
 - Modifier les lignes suivantes du fichier .env :
 ```json 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=gestioncms
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
+
+- Modifier les lignes suivantes du fichier .env.testing :
+```json 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gestioncms_test
 DB_USERNAME=root
 DB_PASSWORD=secret
 ```
