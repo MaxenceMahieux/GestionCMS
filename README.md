@@ -75,6 +75,15 @@ DB_PASSWORD=secret
   </tbody>
 </table>
 
+## Problèmes
+
+### Barre de navigation mal affichée
+Dans le cas où la barre de navigation n'aurait aucun style de chargé, rendez vous dans :
+`public/hot`
+
+Après cela, modifier le fichier en le remplaçant par :
+`http://localhost:4000`
+
 ## Credits
 
 Réalisé et développé par Maxence Mahieux
