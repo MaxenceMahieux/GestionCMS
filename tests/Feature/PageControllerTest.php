@@ -18,9 +18,6 @@ class PageControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Index method return view with menus
-     */
     public function test_index_method_return_page_view()
     {
         $user = User::factory()->create();
@@ -33,17 +30,11 @@ class PageControllerTest extends TestCase
                 'title' => 'Test update',
                 'link' => 'update link',
                 'radio_choice' => '1',
-                'menu_id' => "{$menu->id}",
+                'menu_id' => $menu->id,
             ]);
-        // When
 
         $response = $this->get(route('page.index'));
-
-
-        // Then
-
         $response->assertStatus(200);
-
         $response->assertViewIs('page.index');
     }
 
@@ -63,7 +54,7 @@ class PageControllerTest extends TestCase
                 'menu_id' => $menu->id,
             ]);
 
-        $submenuId = Submenu::latest()->first()->id; // Récupérer l'ID du dernier sous-menu créé
+        $submenuId = Submenu::latest()->first()->id;
 
         $response = $this
             ->actingAs($user)
@@ -73,13 +64,12 @@ class PageControllerTest extends TestCase
                 'radio_choice' => '1',
                 'publication_date' => fake()->date,
                 'menu_id' => $menu->id,
-                'submenu_id' => $submenuId, // Utiliser l'ID du sous-menu créé
+                'submenu_id' => $submenuId,
             ]);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect('/page');
 
-        // Vérification si la page a été créée avec succès
         $this->assertDatabaseHas('pages', [
             'title' => 'Test update',
             'message' => 'update message',
@@ -89,7 +79,6 @@ class PageControllerTest extends TestCase
     }
 
 
-    /** @test */
     public function test_editor_can_access_page_create_page()
     {
         $editor = User::factory()->create();
@@ -101,7 +90,6 @@ class PageControllerTest extends TestCase
         $response->assertViewHas('pages', Page::all());
     }
 
-    /** @test */
     public function test_non_editor_cannot_access_submenu_create_page()
     {
         $user = User::factory()->create();
@@ -110,9 +98,6 @@ class PageControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-            /**
-     * Index method return view with menus
-     */
     public function test_show_method_returns_view_with_submenu()
     {
         $menu = Menu::factory()->create();
@@ -138,20 +123,14 @@ class PageControllerTest extends TestCase
         $response->assertViewIs('page.show');
         $response->assertViewHas('page', $page);
     }
-    
-    /**
-     * Index method return view with menus
-     */
+
     public function test_editor_can_access_edit_page()
     {
         $menu = Menu::factory()->create();
-        // Création d'un utilisateur administrateur
         $editor = User::factory()->create();
         Bouncer::allow($editor)->to('page-edit');
-        // Simuler l'authentification de cet utilisateur
         $this->actingAs($editor);
 
-        // Création d'un menu
         $submenu = Submenu::factory()->create([
             'title' => 'Test update',
             'link' => 'update link',
@@ -168,10 +147,8 @@ class PageControllerTest extends TestCase
             'submenu_id' => $submenu->id,
         ]);
 
-        // Accéder à la page d'édition en tant qu'administrateur
         $response = $this->get(route('page.edit', ['page' => $page]));
 
-        // Vérification que l'administrateur peut accéder à la page
         $response->assertStatus(200);
         $response->assertViewIs('page.edit');
         $response->assertViewHas('page', $page);
@@ -180,13 +157,10 @@ class PageControllerTest extends TestCase
     public function test_non_editor_cannot_access_edit_page()
     {
         $menu = Menu::factory()->create();
-        // Création d'un utilisateur sans privilèges administratifs
         $user = User::factory()->create();
 
-        // Simuler l'authentification de cet utilisateur
         $this->actingAs($user);
 
-        // Création d'un menu
         $submenu = Submenu::factory()->create([
             'title' => 'Test update',
             'link' => 'update link',
@@ -203,17 +177,14 @@ class PageControllerTest extends TestCase
             'submenu_id' => $submenu->id,
         ]);
 
-        // Tentative d'accéder à la page d'édition en tant qu'utilisateur régulier
         $response = $this->get(route('page.edit', ['page' => $page]));
 
-        // Vérification que l'utilisateur régulier ne peut pas accéder à la page
-        $response->assertStatus(403); // Code HTTP 403: Accès refusé
+        $response->assertStatus(403);
     }
 
     public function test_update_method_updates_menu()
     {
         $menu = Menu::factory()->create();
-        // Création d'un menu
         $submenu = Submenu::factory()->create([
             'title' => 'Test update',
             'link' => 'update link',
@@ -230,7 +201,6 @@ class PageControllerTest extends TestCase
             'submenu_id' => $submenu->id,
         ]);
 
-        // Données simulées pour la mise à jour
         $updatedData = [
             'title' => 'Test update 2',
             'message' => 'update message 2',
@@ -240,13 +210,10 @@ class PageControllerTest extends TestCase
             'submenu_id' => $submenu->id,
         ];
 
-        // Appeler la méthode update avec les données simulées via une requête HTTP simulée
         $response = $this->put(route('page.update', ['page' => $page->id]), $updatedData);
 
-        // Récupérer le menu mis à jour depuis la base de données
         $updatedPage = Page::find($page->id);
 
-        // Vérifier que les modifications ont été apportées au menu
         $this->assertEquals($updatedData['title'], $updatedPage->title);
         $this->assertEquals($updatedData['message'], $updatedPage->message);
         $this->assertEquals($updatedData['radio_choice'], $updatedPage->visible);
@@ -255,12 +222,11 @@ class PageControllerTest extends TestCase
         $this->assertEquals($updatedData['submenu_id'], $updatedPage->submenu_id);
     }
 
-    public function test_user_with_editor_role_can_delete_menu() : void
+    public function test_editor_can_delete_menu() : void
     {
         
         $editor = User::factory()->create();
         Bouncer::allow($editor)->to('page-delete');
-        // Simuler l'authentification de cet utilisateur
 
         $menu = Menu::factory()->create();
 

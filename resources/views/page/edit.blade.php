@@ -7,12 +7,12 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" required class="form-control" value="{{ $page->title }}" required>
+        <x-input-text property="title" :value="$page->title" />
       </div>
 
       <div class="mb-3">
         <label for="message" class="form-label">Message</label>
-        <input type="text" name="message" id="message" class="form-control" value="{{ $page->message }}" required>
+        <x-input-text property="message" :value="$page->message" />
       </div>
 
       <div class="mb-3">

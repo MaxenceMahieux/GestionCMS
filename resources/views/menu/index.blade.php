@@ -6,7 +6,7 @@
   </x-slot>
   <div class="container">
     @can('menu-create')
-      <a href="{{ route('menu.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+      <x-add-button :route="route('menu.create')" />
     @endcan
 
     <ul class="list-group mt-5">
@@ -18,14 +18,10 @@
             </a>
             <div class="d-flex gap-3">
               @can('menu-edit')
-                <a href="{{ route('menu.edit', ['menu' => $menu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                <x-edit-button :route="route('menu.edit', ['menu' => $menu->id])"/>
               @endcan
               @can('menu-delete')
-              <form action="{{ route('menu.destroy', $menu) }}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-              </form>
+                <x-delete-button :route="route('menu.destroy', $menu)" />
               @endcan
             </div>
           </div>

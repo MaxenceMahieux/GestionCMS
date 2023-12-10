@@ -7,13 +7,13 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" class="form-control" value="{{ $menu->title }}" required>
+        <x-input-text property="title" :value="$menu->title" />
       </div>
 
       <div class="mb-3">
         <label for="link" class="form-label">Lien</label>
-        <input type="text" name="link" id="link" class="form-control" value="{{ $menu->link }}" required>
-      </div>
+        <x-input-text property="link" :value="$menu->link" />
+        </div>
 
       <div class="mb-3">
         <label class="form-label">Voulez-vous l'afficher ?</label>

@@ -7,12 +7,12 @@
 
       <div class="mb-3">
         <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" id="title" required class="form-control" value="{{ $submenu->title }}" required />
+        <x-input-text property="title" :value="$submenu->title" />
       </div>
 
       <div class="mb-3">
         <label for="link" class="form-label">Lien</label>
-        <input type="text" name="link" id="link" class="form-control" value="{{ $submenu->link }}" required />
+        <x-input-text property="title" :value="$submenu->link" />
       </div>
 
       <div class="mb-3">

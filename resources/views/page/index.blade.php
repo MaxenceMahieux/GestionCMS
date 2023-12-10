@@ -7,7 +7,7 @@
   <div class="container">
     
     @can('page-create')
-      <a href="{{ route('page.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+      <x-add-button :route="route('page.create')" />
     @endcan
 
     <ul class="list-group mt-5">
@@ -19,14 +19,10 @@
             </a>
             <div class="d-flex gap-3">
                 @can('page-edit')
-                  <a href="{{ route('page.edit', ['page' => $page->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                  <x-edit-button :route="route('page.edit', ['page' => $page->id])"/>
                 @endcan
                 @can('page-delete')
-                  <form action="{{ route('page.destroy', $page) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-                  </form>
+                  <x-delete-button :route="route('page.destroy', $page)" />
                 @endcan
             </div>
           </div>

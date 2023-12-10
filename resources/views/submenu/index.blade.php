@@ -7,7 +7,7 @@
   <div class="container">
     
     @can('submenu-create')
-      <a href="{{ route('submenu.create') }}" class="btn btn-primary mt-5">Ajouter</a>
+      <x-add-button :route="route('submenu.create')" />
     @endcan
 
     <ul class="list-group mt-5">
@@ -19,14 +19,10 @@
             </a>
             <div class="d-flex gap-3">
                 @can('submenu-edit')
-                  <a href="{{ route('submenu.edit', ['submenu' => $submenu->id]) }}" class="btn btn-warning btn-sm">Modifier</a>
+                  <x-edit-button :route="route('submenu.edit', ['submenu' => $submenu->id])"/>
                 @endcan
                 @can('submenu-delete')
-                  <form action="{{ route('submenu.destroy', $submenu) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Supprimer" class="btn btn-danger btn-sm">
-                  </form>
+                  <x-delete-button :route="route('submenu.destroy', $submenu)" />
                 @endcan
             </div>
           </div>

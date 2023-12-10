@@ -5,19 +5,15 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Models\Menu;
 
-class InputText extends Component
+class RadioChoice extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $property;
-    public $value;
-    
-    public function __construct($property, $value = null) {
-        $this-> property = $property;
-        $this-> value = $value;
+    public function __construct()
+    {
+        //
     }
 
     /**
@@ -25,7 +21,6 @@ class InputText extends Component
      */
     public function render(): View|Closure|string
     {
-        $menu = Menu::first();
-        return view('components.input-text', compact('menu'));
+        return view('components.input-radio');
     }
 }
